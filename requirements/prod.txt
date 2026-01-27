@@ -1,0 +1,11 @@
+-r base.txt
+
+# Production WSGI/ASGI
+gunicorn>=21.2.0
+uvicorn[standard]>=0.27.0
+
+# Security
+django-secure>=1.0.1
+
+# Performance
+django-cachalot>=2.6.1

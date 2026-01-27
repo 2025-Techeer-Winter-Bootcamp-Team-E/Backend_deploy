@@ -1,0 +1,1094 @@
+[
+{
+    "model": "categories.categorymodel",
+    "pk": 1,
+    "fields": {
+        "name": "디지털 완제품",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T02:13:31.401Z",
+        "updated_at": "2026-01-19T02:13:31.401Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 2,
+    "fields": {
+        "name": "노트북",
+        "parent": 1,
+        "level": 1,
+        "created_at": "2026-01-19T02:13:31.412Z",
+        "updated_at": "2026-01-19T02:13:31.412Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 3,
+    "fields": {
+        "name": "LG전자",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:13:31.415Z",
+        "updated_at": "2026-01-19T02:13:31.415Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 4,
+    "fields": {
+        "name": "삼성전자",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:13:50.141Z",
+        "updated_at": "2026-01-19T02:13:50.141Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 5,
+    "fields": {
+        "name": "ASUS",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:14:01.158Z",
+        "updated_at": "2026-01-19T02:14:01.158Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 6,
+    "fields": {
+        "name": "MSI",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:15:06.451Z",
+        "updated_at": "2026-01-19T02:15:06.451Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 7,
+    "fields": {
+        "name": "HP",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:15:49.286Z",
+        "updated_at": "2026-01-19T02:15:49.286Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 8,
+    "fields": {
+        "name": "에이서",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:16:06.223Z",
+        "updated_at": "2026-01-19T02:16:06.223Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 9,
+    "fields": {
+        "name": "레노버",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:16:24.774Z",
+        "updated_at": "2026-01-19T02:16:24.774Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 10,
+    "fields": {
+        "name": "APPLE",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-19T02:19:59.150Z",
+        "updated_at": "2026-01-19T02:19:59.150Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 11,
+    "fields": {
+        "name": "데스크탑",
+        "parent": 1,
+        "level": 1,
+        "created_at": "2026-01-19T02:24:28.515Z",
+        "updated_at": "2026-01-19T02:24:28.515Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 12,
+    "fields": {
+        "name": "브랜드PC",
+        "parent": 11,
+        "level": 2,
+        "created_at": "2026-01-19T02:24:28.519Z",
+        "updated_at": "2026-01-19T02:24:28.519Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 13,
+    "fields": {
+        "name": "다나와표준PC",
+        "parent": 11,
+        "level": 2,
+        "created_at": "2026-01-19T02:30:51.141Z",
+        "updated_at": "2026-01-19T02:30:51.141Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 14,
+    "fields": {
+        "name": "조립PC",
+        "parent": 11,
+        "level": 2,
+        "created_at": "2026-01-19T02:31:15.553Z",
+        "updated_at": "2026-01-19T02:31:15.553Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 15,
+    "fields": {
+        "name": "게임",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T02:39:53.225Z",
+        "updated_at": "2026-01-19T02:39:53.225Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 16,
+    "fields": {
+        "name": "PC/전용/에뮬레이터",
+        "parent": 15,
+        "level": 1,
+        "created_at": "2026-01-19T02:39:53.227Z",
+        "updated_at": "2026-01-19T02:39:53.227Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 17,
+    "fields": {
+        "name": "전용 게임기",
+        "parent": 16,
+        "level": 2,
+        "created_at": "2026-01-19T02:39:53.228Z",
+        "updated_at": "2026-01-19T02:39:53.228Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 18,
+    "fields": {
+        "name": "모니터",
+        "parent": 1,
+        "level": 1,
+        "created_at": "2026-01-19T02:40:03.420Z",
+        "updated_at": "2026-01-19T02:40:03.420Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 19,
+    "fields": {
+        "name": "크기별",
+        "parent": 18,
+        "level": 2,
+        "created_at": "2026-01-19T02:40:03.422Z",
+        "updated_at": "2026-01-19T02:40:03.422Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 20,
+    "fields": {
+        "name": "PC 주요 부품",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T02:47:18.806Z",
+        "updated_at": "2026-01-19T02:47:18.806Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 21,
+    "fields": {
+        "name": "CPU",
+        "parent": 90,
+        "level": 1,
+        "created_at": "2026-01-19T02:47:18.807Z",
+        "updated_at": "2026-01-19T02:47:18.807Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 22,
+    "fields": {
+        "name": "AMD",
+        "parent": 21,
+        "level": 2,
+        "created_at": "2026-01-19T02:47:18.808Z",
+        "updated_at": "2026-01-19T02:47:18.808Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 23,
+    "fields": {
+        "name": "인텔",
+        "parent": 21,
+        "level": 2,
+        "created_at": "2026-01-19T02:47:45.779Z",
+        "updated_at": "2026-01-19T02:47:45.779Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 24,
+    "fields": {
+        "name": "그래픽카드",
+        "parent": null,
+        "level": 1,
+        "created_at": "2026-01-19T02:53:22.751Z",
+        "updated_at": "2026-01-19T02:53:22.751Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 25,
+    "fields": {
+        "name": "NVIDIA 계열",
+        "parent": 24,
+        "level": 2,
+        "created_at": "2026-01-19T02:53:22.753Z",
+        "updated_at": "2026-01-19T02:53:22.753Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 26,
+    "fields": {
+        "name": "AMD(ATi) 계열",
+        "parent": 24,
+        "level": 2,
+        "created_at": "2026-01-19T02:54:27.636Z",
+        "updated_at": "2026-01-19T02:54:27.636Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 27,
+    "fields": {
+        "name": "SSD",
+        "parent": 89,
+        "level": 1,
+        "created_at": "2026-01-19T02:59:42.556Z",
+        "updated_at": "2026-01-19T02:59:42.556Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 28,
+    "fields": {
+        "name": "내장형 SSD",
+        "parent": 27,
+        "level": 2,
+        "created_at": "2026-01-19T02:59:42.559Z",
+        "updated_at": "2026-01-19T02:59:42.559Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 29,
+    "fields": {
+        "name": "해외/병행/벌크",
+        "parent": 27,
+        "level": 2,
+        "created_at": "2026-01-19T03:01:07.091Z",
+        "updated_at": "2026-01-19T03:01:07.091Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 30,
+    "fields": {
+        "name": "주변기기",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T03:01:25.626Z",
+        "updated_at": "2026-01-19T03:01:25.626Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 31,
+    "fields": {
+        "name": "외장HDD/SSD",
+        "parent": 89,
+        "level": 1,
+        "created_at": "2026-01-19T03:01:25.628Z",
+        "updated_at": "2026-01-19T03:01:25.628Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 32,
+    "fields": {
+        "name": "외장SSD",
+        "parent": 31,
+        "level": 2,
+        "created_at": "2026-01-19T03:01:25.630Z",
+        "updated_at": "2026-01-19T03:01:25.630Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 33,
+    "fields": {
+        "name": "RAM",
+        "parent": 90,
+        "level": 1,
+        "created_at": "2026-01-19T03:06:00.608Z",
+        "updated_at": "2026-01-19T03:06:00.608Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 34,
+    "fields": {
+        "name": "DDR5",
+        "parent": 33,
+        "level": 2,
+        "created_at": "2026-01-19T03:06:00.611Z",
+        "updated_at": "2026-01-19T03:06:00.611Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 35,
+    "fields": {
+        "name": "DDR4",
+        "parent": 33,
+        "level": 2,
+        "created_at": "2026-01-19T03:06:40.526Z",
+        "updated_at": "2026-01-19T03:06:40.526Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 36,
+    "fields": {
+        "name": "중고/해외구매",
+        "parent": 33,
+        "level": 2,
+        "created_at": "2026-01-19T03:08:23.185Z",
+        "updated_at": "2026-01-19T03:08:23.185Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 37,
+    "fields": {
+        "name": "메인보드",
+        "parent": 90,
+        "level": 1,
+        "created_at": "2026-01-19T03:14:53.308Z",
+        "updated_at": "2026-01-19T03:14:53.308Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 38,
+    "fields": {
+        "name": "AMD CPU용",
+        "parent": 37,
+        "level": 2,
+        "created_at": "2026-01-19T03:14:53.310Z",
+        "updated_at": "2026-01-19T03:14:53.310Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 39,
+    "fields": {
+        "name": "마우스",
+        "parent": 91,
+        "level": 1,
+        "created_at": "2026-01-19T03:15:41.988Z",
+        "updated_at": "2026-01-19T03:15:41.988Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 40,
+    "fields": {
+        "name": "인텔 CPU용",
+        "parent": 37,
+        "level": 2,
+        "created_at": "2026-01-19T03:15:49.571Z",
+        "updated_at": "2026-01-19T03:15:49.571Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 41,
+    "fields": {
+        "name": "파워",
+        "parent": 90,
+        "level": 1,
+        "created_at": "2026-01-19T03:20:54.928Z",
+        "updated_at": "2026-01-19T03:20:54.928Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 42,
+    "fields": {
+        "name": "ATX 파워",
+        "parent": 41,
+        "level": 2,
+        "created_at": "2026-01-19T03:20:54.929Z",
+        "updated_at": "2026-01-19T03:20:54.929Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 43,
+    "fields": {
+        "name": "케이스",
+        "parent": 90,
+        "level": 1,
+        "created_at": "2026-01-19T03:26:59.236Z",
+        "updated_at": "2026-01-19T03:26:59.236Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 44,
+    "fields": {
+        "name": "일반 PC케이스",
+        "parent": 43,
+        "level": 2,
+        "created_at": "2026-01-19T03:26:59.238Z",
+        "updated_at": "2026-01-19T03:26:59.238Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 45,
+    "fields": {
+        "name": "태블릿/휴대폰",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T03:29:42.544Z",
+        "updated_at": "2026-01-19T03:29:42.544Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 46,
+    "fields": {
+        "name": "PC헤드셋",
+        "parent": 91,
+        "level": 1,
+        "created_at": "2026-01-19T03:29:42.545Z",
+        "updated_at": "2026-01-19T03:29:42.545Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 47,
+    "fields": {
+        "name": "미니PC용(미니ITX)",
+        "parent": 43,
+        "level": 2,
+        "created_at": "2026-01-19T03:32:12.006Z",
+        "updated_at": "2026-01-19T03:32:12.006Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 48,
+    "fields": {
+        "name": "키보드",
+        "parent": 91,
+        "level": 1,
+        "created_at": "2026-01-19T03:32:47.633Z",
+        "updated_at": "2026-01-19T03:32:47.633Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 49,
+    "fields": {
+        "name": "키보드+마우스",
+        "parent": 91,
+        "level": 2,
+        "created_at": "2026-01-19T03:32:47.635Z",
+        "updated_at": "2026-01-19T03:32:47.635Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 50,
+    "fields": {
+        "name": "쿨러/튜닝",
+        "parent": 30,
+        "level": 1,
+        "created_at": "2026-01-19T03:33:20.771Z",
+        "updated_at": "2026-01-19T03:33:20.771Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 51,
+    "fields": {
+        "name": "CPU 쿨러",
+        "parent": 50,
+        "level": 2,
+        "created_at": "2026-01-19T03:33:20.772Z",
+        "updated_at": "2026-01-19T03:33:20.772Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 52,
+    "fields": {
+        "name": "Micro-ATX 파워",
+        "parent": 41,
+        "level": 2,
+        "created_at": "2026-01-21T07:19:51.251Z",
+        "updated_at": "2026-01-21T07:19:51.251Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 53,
+    "fields": {
+        "name": "베어본",
+        "parent": 11,
+        "level": 2,
+        "created_at": "2026-01-21T08:13:56.198Z",
+        "updated_at": "2026-01-21T08:13:56.198Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 54,
+    "fields": {
+        "name": "리퍼비시",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-21T08:44:20.391Z",
+        "updated_at": "2026-01-21T08:44:20.391Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 55,
+    "fields": {
+        "name": "델",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-21T08:47:33.662Z",
+        "updated_at": "2026-01-21T08:47:33.662Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 56,
+    "fields": {
+        "name": "한성",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-21T08:49:07.142Z",
+        "updated_at": "2026-01-21T08:49:07.142Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 57,
+    "fields": {
+        "name": "기가바이트",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-21T08:49:54.807Z",
+        "updated_at": "2026-01-21T08:49:54.807Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 58,
+    "fields": {
+        "name": "그외 제조사",
+        "parent": 2,
+        "level": 2,
+        "created_at": "2026-01-21T08:50:43.070Z",
+        "updated_at": "2026-01-21T08:50:43.070Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 59,
+    "fields": {
+        "name": "태블릿",
+        "parent": 45,
+        "level": 1,
+        "created_at": "2026-01-21T08:53:04.485Z",
+        "updated_at": "2026-01-21T08:53:04.485Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 60,
+    "fields": {
+        "name": "안드로이드OS",
+        "parent": 59,
+        "level": 2,
+        "created_at": "2026-01-21T08:53:04.487Z",
+        "updated_at": "2026-01-21T08:53:04.487Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 61,
+    "fields": {
+        "name": "중고/해외구매",
+        "parent": 24,
+        "level": 2,
+        "created_at": "2026-01-21T09:00:01.213Z",
+        "updated_at": "2026-01-21T09:00:01.213Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 62,
+    "fields": {
+        "name": "그외 제조사",
+        "parent": 24,
+        "level": 2,
+        "created_at": "2026-01-21T11:51:09.113Z",
+        "updated_at": "2026-01-21T11:51:09.113Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 63,
+    "fields": {
+        "name": "HDD",
+        "parent": 89,
+        "level": 1,
+        "created_at": "2026-01-21T11:54:13.959Z",
+        "updated_at": "2026-01-21T11:54:13.959Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 64,
+    "fields": {
+        "name": "PC용 HDD",
+        "parent": 63,
+        "level": 2,
+        "created_at": "2026-01-21T11:54:13.962Z",
+        "updated_at": "2026-01-21T11:54:13.962Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 65,
+    "fields": {
+        "name": "서버용 HDD",
+        "parent": 63,
+        "level": 2,
+        "created_at": "2026-01-21T11:54:16.216Z",
+        "updated_at": "2026-01-21T11:54:16.216Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 66,
+    "fields": {
+        "name": "노트북용 HDD",
+        "parent": 63,
+        "level": 2,
+        "created_at": "2026-01-21T11:54:23.642Z",
+        "updated_at": "2026-01-21T11:54:23.642Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 67,
+    "fields": {
+        "name": "외장하드",
+        "parent": 31,
+        "level": 2,
+        "created_at": "2026-01-21T11:54:25.982Z",
+        "updated_at": "2026-01-21T11:54:25.982Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 68,
+    "fields": {
+        "name": "서버용 파워",
+        "parent": 41,
+        "level": 2,
+        "created_at": "2026-01-21T11:57:28.273Z",
+        "updated_at": "2026-01-21T11:57:28.273Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 69,
+    "fields": {
+        "name": "TFX 파워",
+        "parent": 41,
+        "level": 2,
+        "created_at": "2026-01-21T11:57:29.656Z",
+        "updated_at": "2026-01-21T11:57:29.656Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 70,
+    "fields": {
+        "name": "SSD/HDD 쿨러",
+        "parent": 50,
+        "level": 2,
+        "created_at": "2026-01-21T11:58:02.733Z",
+        "updated_at": "2026-01-21T11:58:02.733Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 71,
+    "fields": {
+        "name": "외장 케이스",
+        "parent": 31,
+        "level": 2,
+        "created_at": "2026-01-21T12:01:13.967Z",
+        "updated_at": "2026-01-21T12:01:13.967Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 72,
+    "fields": {
+        "name": "시스템 쿨러",
+        "parent": 50,
+        "level": 2,
+        "created_at": "2026-01-21T12:02:15.938Z",
+        "updated_at": "2026-01-21T12:02:15.938Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 73,
+    "fields": {
+        "name": "멀티미디어/네트워크",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-21T12:02:52.458Z",
+        "updated_at": "2026-01-21T12:02:52.458Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 74,
+    "fields": {
+        "name": "영상/TV/PC캠",
+        "parent": 73,
+        "level": 1,
+        "created_at": "2026-01-21T12:02:52.459Z",
+        "updated_at": "2026-01-21T12:02:52.459Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 75,
+    "fields": {
+        "name": "영상편집장치",
+        "parent": 74,
+        "level": 2,
+        "created_at": "2026-01-21T12:02:52.460Z",
+        "updated_at": "2026-01-21T12:02:52.460Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 76,
+    "fields": {
+        "name": "튜닝 용품",
+        "parent": 50,
+        "level": 2,
+        "created_at": "2026-01-21T12:03:15.090Z",
+        "updated_at": "2026-01-21T12:03:15.090Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 77,
+    "fields": {
+        "name": "주변용품",
+        "parent": 39,
+        "level": 2,
+        "created_at": "2026-01-21T12:03:30.593Z",
+        "updated_at": "2026-01-21T12:03:30.593Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 78,
+    "fields": {
+        "name": "전용 액세서리",
+        "parent": 43,
+        "level": 2,
+        "created_at": "2026-01-21T12:03:42.939Z",
+        "updated_at": "2026-01-21T12:03:42.939Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 79,
+    "fields": {
+        "name": "튜닝 케이스",
+        "parent": 43,
+        "level": 2,
+        "created_at": "2026-01-21T12:04:00.738Z",
+        "updated_at": "2026-01-21T12:04:00.738Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 80,
+    "fields": {
+        "name": "트랙볼",
+        "parent": 39,
+        "level": 2,
+        "created_at": "2026-01-21T12:07:20.960Z",
+        "updated_at": "2026-01-21T12:07:20.960Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 81,
+    "fields": {
+        "name": "PC 캠",
+        "parent": 91,
+        "level": 2,
+        "created_at": "2026-01-21T12:08:41.453Z",
+        "updated_at": "2026-01-21T12:08:41.453Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 82,
+    "fields": {
+        "name": "영상음향",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-21T12:09:26.525Z",
+        "updated_at": "2026-01-21T12:09:26.525Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 83,
+    "fields": {
+        "name": "스피커",
+        "parent": 91,
+        "level": 1,
+        "created_at": "2026-01-21T12:09:26.526Z",
+        "updated_at": "2026-01-21T12:09:26.526Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 84,
+    "fields": {
+        "name": "HIFI/AV스피커",
+        "parent": 83,
+        "level": 2,
+        "created_at": "2026-01-21T12:09:26.527Z",
+        "updated_at": "2026-01-21T12:09:26.527Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 85,
+    "fields": {
+        "name": "주변기기/관련상품",
+        "parent": 18,
+        "level": 2,
+        "created_at": "2026-01-21T12:11:00.974Z",
+        "updated_at": "2026-01-21T12:11:00.974Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 86,
+    "fields": {
+        "name": "노트북 주변기기",
+        "parent": 1,
+        "level": 1,
+        "created_at": "2026-01-21T12:11:45.102Z",
+        "updated_at": "2026-01-21T12:11:45.102Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 87,
+    "fields": {
+        "name": "받침대/쿨러",
+        "parent": 86,
+        "level": 2,
+        "created_at": "2026-01-21T12:11:45.122Z",
+        "updated_at": "2026-01-21T12:11:45.122Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 88,
+    "fields": {
+        "name": "RAM 쿨러",
+        "parent": 50,
+        "level": 2,
+        "created_at": "2026-01-21T12:12:36.167Z",
+        "updated_at": "2026-01-21T12:12:36.167Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 89,
+    "fields": {
+        "name": "저장장치",
+        "parent": 90,
+        "level": 1,
+        "created_at": "2026-01-19T02:13:50.141Z",
+        "updated_at": "2026-01-19T02:13:50.141Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 90,
+    "fields": {
+        "name": "PC 주요 부품",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T02:40:03.422Z",
+        "updated_at": "2026-01-19T02:40:03.422Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "categories.categorymodel",
+    "pk": 91,
+    "fields": {
+        "name": "주변기기(수정)",
+        "parent": null,
+        "level": 0,
+        "created_at": "2026-01-19T02:40:03.420Z",
+        "updated_at": "2026-01-19T02:40:03.420Z",
+        "deleted_at": null
+    }
+}
+]
