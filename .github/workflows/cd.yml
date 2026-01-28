@@ -14,14 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. docker-compose.backend.yml 파일을 EC2로 전송합니다.
+      # 2. cd.yml 파일을 EC2로 전송합니다.
       - name: Copy Docker Compose file to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "docker-compose.backend.yml"
+          source: "cd.yml"
           target: "~/deploy"
 
       # 3. SSH 접속 후 배포 명령을 실행합니다.
@@ -50,11 +50,11 @@ jobs:
 
             # 2. 백엔드 서비스 이미지 Pull 및 실행
             # sudo 권한이 필요한 경우를 대비해 sudo를 붙였습니다.
-            sudo docker compose -f docker-compose.backend.yml pull
-            sudo docker compose -f docker-compose.backend.yml up -d
+            sudo docker compose -f cd.yml pull
+            sudo docker compose -f cd.yml up -d
 
             # 3. 컨테이너 상태 확인
-            sudo docker compose -f docker-compose.backend.yml ps
+            sudo docker compose -f cd.yml ps
 
             # 4. 사용하지 않는 구형 이미지 정리
             sudo docker image prune -f
