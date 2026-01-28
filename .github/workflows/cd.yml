@@ -20,8 +20,9 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ec2-user
           key: ${{ secrets.SERVER_PEM_KEY }}
-          
-          # 오류 발생 시 즉시 중단
+        
+          script: | 
+            set -e # 오류 발생 시 즉시 중단
 
             # 1. 배포 폴더로 이동
             cd ~/deploy
@@ -59,6 +60,3 @@ jobs:
 
             # 6. 불필요한 옛날 이미지 정리
             docker image prune -f
-
-          script: |
-            set -e
