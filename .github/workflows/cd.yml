@@ -3,6 +3,8 @@ name: CD - Deploy to Server via SSH
 on:
   push:
     branches: ["main"]  # main 브랜치 푸시 시 자동 배포
+  repository_dispatch: # ✅ 외부 신호를 받도록 추가
+    types: [trigger-deploy]
   workflow_dispatch:      # 수동 실행 지원
 
 jobs:
