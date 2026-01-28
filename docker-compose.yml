@@ -54,4 +54,37 @@ services:
       retries: 5
     restart: always
 
-  # ... (나머지 서비스들도 위와 같이 image 사용 및 restart: always 적용)
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: backend_redis
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: backend_rabbitmq
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  backend_network:
+    driver: bridge
