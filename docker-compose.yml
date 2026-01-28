@@ -1,30 +1,29 @@
-version: '3.9'
-
 services:
   backend:
-    image: techeer/backend:latest  # 빌드 대신 이미지 사용
+    image: techeer/backend:latest
     container_name: backend_app
-    # Gunicorn 사용 (이미 Dockerfile CMD에 있다면 생략 가능)
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
-      - ./logs:/var/log/django 
+      - ./logs:/var/log/django
       - static_volume:/app/staticfiles
       - media_volume:/app/media
     ports:
-      - "80:8000"  # EC2의 80포트로 접속 허용
+      - "80:8000"
     env_file: .env
     environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.prod # 운영 설정으로 변경
+      - DJANGO_SETTINGS_MODULE=config.settings.prod
       - POSTGRES_HOST=postgres
     depends_on:
-      postgres: { condition: service_healthy }
-      redis: { condition: service_healthy }
-      rabbitmq: { condition: service_healthy }
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     networks:
       - backend_network
-    restart: always # 운영 중 장애 시 무조건 재시작
+    restart: always
 
-  # Celery Worker (이미지 공유, 빌드 제외)
   celery_worker:
     image: techeer/backend:latest
     container_name: backend_celery_worker
@@ -33,15 +32,16 @@ services:
     environment:
       - POSTGRES_HOST=postgres
     depends_on:
-      postgres: { condition: service_healthy }
-      redis: { condition: service_healthy }
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
       - backend_network
     restart: always
     volumes:
       - ./logs:/var/log/django
 
-  # PostgreSQL (pgvector)
   postgres:
     image: pgvector/pgvector:pg16
     container_name: backend_postgres
@@ -60,7 +60,6 @@ services:
       retries: 5
     restart: always
 
-  # Redis
   redis:
     image: redis:7-alpine
     container_name: backend_redis
@@ -73,7 +72,6 @@ services:
       retries: 5
     restart: always
 
-  # RabbitMQ
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: backend_rabbitmq
@@ -93,4 +91,4 @@ volumes:
 
 networks:
   backend_network:
-    driver: bridge
+    driver: bridge # ✅ 네트워크 드라이버를 명시하여 정의를 완성합니다.
