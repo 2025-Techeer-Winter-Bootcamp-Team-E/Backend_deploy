@@ -38,6 +38,7 @@ jobs:
 
             # 폴더 생성 및 이동
             mkdir -p ~/deploy
+            mkdir -p logs
             chmod 777 logs
 
             # 1. 환경 변수(.env) 파일 생성
