@@ -2,34 +2,43 @@ name: CD - Deploy to Server via SSH
 
 on:
   push :
-    branches: ["main"]  # main 브랜치에 푸시될 때마다 실행
-  workflow_dispatch: # ✅ 수동 실행 버튼도 유지합니다.
-  workflow_run:
-    workflows: ["Django-Docker-CI"]
-    types:
-      - completed
+    branches: ["main"]  # main 브랜치 푸시 시 자동 배포
+  workflow_dispatch:      # 수동 실행 지원
 
 jobs:
   deploy:
-    
-    
     runs-on: ubuntu-latest
 
     steps:
+      # 1. GitHub 저장소의 파일을 가져옵니다.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. docker-compose.backend.yml 파일을 EC2로 전송합니다.
+      - name: Copy Docker Compose file to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "docker-compose.backend.yml"
+          target: "~/deploy"
+
+      # 3. SSH 접속 후 배포 명령을 실행합니다.
       - name: Connect & Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-        
           script: | 
-            set -e # 오류 발생 시 즉시 중단
+            set -e # 에러 발생 시 중단
 
-            # 1. 배포 폴더로 이동
+            # 폴더 생성 및 이동
+            mkdir -p ~/deploy
             cd ~/deploy
 
-            # 2. .env 파일 생성
+            # 1. 환경 변수(.env) 파일 생성
             cat > .env << 'ENVEOF'
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE }}
@@ -39,26 +48,13 @@ jobs:
             DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
             ENVEOF
 
-            # 3. 최신 이미지 가져오기
-            docker compose \
-              -f docker-compose.backend.yml \
-              -f docker-compose.portainer.yml \
-              -f docker-compose.traefik.yml \
-              pull
+            # 2. 백엔드 서비스 이미지 Pull 및 실행
+            # sudo 권한이 필요한 경우를 대비해 sudo를 붙였습니다.
+            sudo docker compose -f docker-compose.backend.yml pull
+            sudo docker compose -f docker-compose.backend.yml up -d
 
-            # 4. 컨테이너 재시작
-            docker compose \
-              -f docker-compose.backend.yml \
-              -f docker-compose.portainer.yml \
-              -f docker-compose.traefik.yml \
-              up -d
+            # 3. 컨테이너 상태 확인
+            sudo docker compose -f docker-compose.backend.yml ps
 
-            # 5. 컨테이너 상태 확인
-            docker compose \
-              -f docker-compose.backend.yml \
-              -f docker-compose.portainer.yml \
-              -f docker-compose.traefik.yml \
-              ps
-
-            # 6. 불필요한 옛날 이미지 정리
-            docker image prune -f
+            # 4. 사용하지 않는 구형 이미지 정리
+            sudo docker image prune -f
