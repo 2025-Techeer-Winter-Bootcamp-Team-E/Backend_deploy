@@ -5,7 +5,7 @@ services:
     image: techeer/backend:latest  # 빌드 대신 이미지 사용
     container_name: backend_app
     # Gunicorn 사용 (이미 Dockerfile CMD에 있다면 생략 가능)
-    command: tail -f /dev/null
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
       - ./logs:/var/log/django 
       - static_volume:/app/staticfiles
