@@ -15,6 +15,7 @@ services:
     env_file: .env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.prod # 운영 설정으로 변경
+      - POSTGRES_HOST=postgres
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
@@ -29,6 +30,8 @@ services:
     container_name: backend_celery_worker
     command: celery -A config worker -l INFO -Q default,embeddings,orders,emails
     env_file: .env
+    environment:
+      - POSTGRES_HOST=postgres
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }

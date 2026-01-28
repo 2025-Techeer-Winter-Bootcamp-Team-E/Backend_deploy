@@ -43,13 +43,14 @@ jobs:
 
             # 1. 환경 변수(.env) 파일 생성
             cat > .env << 'ENVEOF'
-            DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
-            DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE }}
-            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}
-            ENVEOF
+DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE }}
+POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+POSTGRES_HOST=postgres
+DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}
+ENVEOF
 
             # 2. 백엔드 서비스 이미지 Pull 및 실행
             # sudo 권한이 필요한 경우를 대비해 sudo를 붙였습니다.
