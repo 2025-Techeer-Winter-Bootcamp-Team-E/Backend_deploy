@@ -33,10 +33,12 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: | 
             set -e # 에러 발생 시 중단
+            mkdir -p ~/deploy
+            cd ~/deploy
 
             # 폴더 생성 및 이동
             mkdir -p ~/deploy
-            cd ~/deploy
+            chmod 777 logs
 
             # 1. 환경 변수(.env) 파일 생성
             cat > .env << 'ENVEOF'
