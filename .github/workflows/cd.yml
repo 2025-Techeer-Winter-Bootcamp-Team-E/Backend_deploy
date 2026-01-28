@@ -1,7 +1,9 @@
 name: CD - Deploy to Server via SSH
 
 on:
-  workflow_dispatch:
+  push :
+    branches: ["main"]  # main 브랜치에 푸시될 때마다 실행
+  workflow_dispatch: # ✅ 수동 실행 버튼도 유지합니다.
   workflow_run:
     workflows: ["Django-Docker-CI"]
     types:
