@@ -1,7 +1,7 @@
 name: CD - Deploy to Server via SSH
 
 on:
-  push :
+  push:
     branches: ["main"]  # main 브랜치 푸시 시 자동 배포
   workflow_dispatch:      # 수동 실행 지원
 
@@ -27,7 +27,7 @@ jobs:
       # 3. SSH 접속 후 배포 명령을 실행합니다.
       - name: Connect & Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
-수        with:
+        with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
