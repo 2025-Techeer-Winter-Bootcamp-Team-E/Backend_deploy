@@ -1,0 +1,64 @@
+name: CD - Deploy to Server via SSH
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Django-Docker-CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    # workflow_dispatch 또는 CI 성공 시 실행
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect & Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ec2-user
+          key: ${{ secrets.SERVER_PEM_KEY }}
+          
+          # 오류 발생 시 즉시 중단
+
+            # 1. 배포 폴더로 이동
+            cd ~/deploy
+
+            # 2. .env 파일 생성
+            cat > .env << 'ENVEOF'
+            SECRET_KEY=${{ secrets.SECRET_KEY }}
+            DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE }}
+            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+            ENVEOF
+
+            # 3. 최신 이미지 가져오기
+            docker compose \
+              -f docker-compose.backend.yml \
+              -f docker-compose.portainer.yml \
+              -f docker-compose.traefik.yml \
+              pull
+
+            # 4. 컨테이너 재시작
+            docker compose \
+              -f docker-compose.backend.yml \
+              -f docker-compose.portainer.yml \
+              -f docker-compose.traefik.yml \
+              up -d
+
+            # 5. 컨테이너 상태 확인
+            docker compose \
+              -f docker-compose.backend.yml \
+              -f docker-compose.portainer.yml \
+              -f docker-compose.traefik.yml \
+              ps
+
+            # 6. 불필요한 옛날 이미지 정리
+            docker image prune -f
+
+          script: |
+            set -e

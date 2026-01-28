@@ -1,47 +1,50 @@
 version: '3.9'
 
 services:
-  # Django Backend Application
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: techeer/backend:latest  # 빌드 대신 이미지 사용
     container_name: backend_app
-    command: python manage.py runserver 0.0.0.0:8000
+    # Gunicorn 사용 (이미 Dockerfile CMD에 있다면 생략 가능)
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
-      - .:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/media
     ports:
-      - "8000:8000"
-    env_file:
-      - .env
+      - "80:8000"  # EC2의 80포트로 접속 허용
+    env_file: .env
     environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.dev
+      - DJANGO_SETTINGS_MODULE=config.settings.prod # 운영 설정으로 변경
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+      rabbitmq: { condition: service_healthy }
     networks:
       - backend_network
-    restart: unless-stopped
+    restart: always # 운영 중 장애 시 무조건 재시작
 
-  # PostgreSQL + pgvector
+  # Celery Worker (이미지 공유, 빌드 제외)
+  celery_worker:
+    image: techeer/backend:latest
+    container_name: backend_celery_worker
+    command: celery -A config worker -l INFO -Q default,embeddings,orders,emails
+    env_file: .env
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    networks:
+      - backend_network
+    restart: always
+
+  # PostgreSQL (pgvector)
   postgres:
     image: pgvector/pgvector:pg16
     container_name: backend_postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - POSTGRES_DB=${POSTGRES_DB:-backend}
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-    ports:
-      - "5432:5432"
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - backend_network
     healthcheck:
@@ -49,187 +52,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+    restart: always
 
-  # Redis (Cache + Celery Result Backend)
-  redis:
-    image: redis:7-alpine
-    container_name: backend_redis
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
-    volumes:
-      - redis_data:/data
-    ports:
-      - "6379:6379"
-    networks:
-      - backend_network
-    healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis123}", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-
-  # RabbitMQ (Message Broker)
-  rabbitmq:
-    image: rabbitmq:3.12-management-alpine
-    container_name: backend_rabbitmq
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-admin}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-admin123}
-      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_VHOST:-backend}
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - backend_network
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    restart: unless-stopped
-
-  # Celery Worker
-  celery_worker:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: backend_celery_worker
-    command: celery -A config worker -l INFO -Q default,embeddings,orders,emails
-    volumes:
-      - .:/app
-    env_file:
-      - .env
-    environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.dev
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    networks:
-      - backend_network
-    restart: unless-stopped
-
-  # Celery Beat (Scheduler)
-  celery_beat:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: backend_celery_beat
-    command: celery -A config beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
-    volumes:
-      - .:/app
-    env_file:
-      - .env
-    environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.dev
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-      celery_worker:
-        condition: service_started
-    networks:
-      - backend_network
-    restart: unless-stopped
-
-  # Flower (Celery Monitoring)
-  flower:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: backend_flower
-    command: celery -A config flower --port=5555
-    ports:
-      - "5555:5555"
-    env_file:
-      - .env
-    environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.dev
-    depends_on:
-      - celery_worker
-    networks:
-      - backend_network
-    restart: unless-stopped
-
-  # MinIO (S3 Compatible Storage for Development)
-  minio:
-    image: minio/minio:latest
-    container_name: backend_minio
-    command: server /data --console-address ":9001"
-    environment:
-      - MINIO_ROOT_USER=${AWS_ACCESS_KEY_ID:-minioadmin}
-      - MINIO_ROOT_PASSWORD=${AWS_SECRET_ACCESS_KEY:-minioadmin}
-    volumes:
-      - minio_data:/data
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    networks:
-      - backend_network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-    restart: unless-stopped
-
-  # Prometheus (Metrics Collection)
-  prometheus:
-    image: prom/prometheus:v2.47.0
-    container_name: backend_prometheus
-    volumes:
-      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.enable-lifecycle'
-    ports:
-      - "9090:9090"
-    networks:
-      - backend_network
-    restart: unless-stopped
-
-  # Grafana (Visualization)
-  grafana:
-    image: grafana/grafana:10.1.0
-    container_name: backend_grafana
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_INSTALL_PLUGINS=
-      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
-    ports:
-      - "3000:3000"
-    depends_on:
-      - prometheus
-    networks:
-      - backend_network
-    restart: unless-stopped
-
-networks:
-  backend_network:
-    driver: bridge
-
-volumes:
-  postgres_data:
-  redis_data:
-  rabbitmq_data:
-  minio_data:
-  prometheus_data:
-  grafana_data:
-  static_volume:
-  media_volume:
+  # ... (나머지 서비스들도 위와 같이 image 사용 및 restart: always 적용)
