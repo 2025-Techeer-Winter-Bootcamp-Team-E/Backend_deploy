@@ -11,8 +11,8 @@ on:
 
 jobs:
   deploy:
-    # workflow_dispatch 또는 CI 성공 시 실행
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    
+    
     runs-on: ubuntu-latest
 
     steps:
