@@ -2,48 +2,49 @@ name: CD - Deploy to Server via SSH
 
 on:
   push:
-    branches: ["main"]  # main 브랜치 푸시 시 자동 배포
-  repository_dispatch: # ✅ 외부 신호를 받도록 추가
+    branches: ["main"]
+  repository_dispatch:
     types: [trigger-deploy]
-  workflow_dispatch:      # 수동 실행 지원
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. GitHub 저장소의 파일을 가져옵니다.
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. docker-compose.backend.yml 파일을 EC2로 전송합니다.
+      # 파일 복사 (scp)
       - name: Copy Docker Compose file to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
+          host: ${{ secrets.SSH_HOST }}       # ⚠️ 깃허브 Secret 이름과 똑같이 맞춰주세요! (EC2_HOST 인지 SSH_HOST 인지)
+          username: ubuntu                    # ✅ ec2-user -> ubuntu 로 변경 필수!
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "docker-compose.yml"
-          target: "~/deploy"
+          target: "/home/ubuntu/deploy"       # 명확하게 절대 경로 사용 권장
 
-      # 3. SSH 접속 후 배포 명령을 실행합니다.
+      # SSH 접속 및 배포 실행
       - name: Connect & Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
+          host: ${{ secrets.SSH_HOST }}       # ⚠️ 이름 확인!
+          username: ubuntu                    # ✅ ec2-user -> ubuntu 로 변경 필수!
           key: ${{ secrets.EC2_SSH_KEY }}
-          script: | 
-            set -e # 에러 발생 시 중단
-            mkdir -p ~/deploy
-            cd ~/deploy
-
+          script: |
+            set -e
+            
             # 폴더 생성 및 이동
-            mkdir -p ~/deploy
+            mkdir -p /home/ubuntu/deploy
+            cd /home/ubuntu/deploy
+
+            # 로그 폴더 생성
             mkdir -p logs
             chmod 777 logs
 
-            # 1. 환경 변수(.env) 파일 생성
+            # 환경 변수(.env) 파일 생성
+            # (기존 파일이 있으면 덮어쓰기 됨)
             echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" > .env
             echo "DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE }}" >> .env
             echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
@@ -52,13 +53,13 @@ jobs:
             echo "POSTGRES_HOST=postgres" >> .env
             echo "DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}" >> .env
 
-            # 2. 백엔드 서비스 이미지 Pull 및 실행
-            # sudo 권한이 필요한 경우를 대비해 sudo를 붙였습니다.
-            sudo docker compose -f docker-compose.yml pull
-            sudo docker compose -f docker-compose.yml up -d
+            # 도커 실행
+            # (이미 docker 그룹 권한을 줬으므로 sudo 생략 가능하지만, 확실하게 하기 위해 써도 무방함)
+            sudo docker compose pull
+            sudo docker compose up -d
 
-            # 3. 컨테이너 상태 확인
-            sudo docker compose -f docker-compose.yml ps
-
-            # 4. 사용하지 않는 구형 이미지 정리
+            # 상태 확인
+            sudo docker compose ps
+            
+            # 미사용 이미지 정리
             sudo docker image prune -f
