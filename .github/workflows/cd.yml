@@ -55,11 +55,11 @@ jobs:
 
             # 도커 실행
             # (이미 docker 그룹 권한을 줬으므로 sudo 생략 가능하지만, 확실하게 하기 위해 써도 무방함)
-            sudo docker compose pull
-            sudo docker compose up -d
+            sudo docker-compose pull
+            sudo docker-compose up -d
 
             # 상태 확인
-            sudo docker compose ps
+            sudo docker-compose ps
             
             # 미사용 이미지 정리
             sudo docker image prune -f
